@@ -11,7 +11,7 @@ protocol = re.compile("^http[s]?")
 @register.filter
 def mask(url):
     if isinstance(url, basestring):
-        if getattr(settings, "API_ACCESS_PROTOCOL", "https") == "https":
+        if getattr(settings, "API_MASK_PROTOCOL", "https") == "https":
             url = protocol.sub("https", url)
-        return ip.sub(socket.getfqdn(), url)
+        return ip.sub(getattr(settings,"API_MASK_URL", socket.getfqdn()), url)
     return url
