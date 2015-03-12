@@ -25,13 +25,18 @@ Installation
 Required Configuration
 ----------------------
 
-* add `api_filter` to INSTALLED_APPS tuple;
-* add `api_filter.overrides` to `customization_module` key in HORIZON_CONFIG.
+.. code-block:: python
+
+	INSTALLED_APPS += ('api_mask',)
+
+	HORIZON_CONFIG['customization_module'] = 'api_mask.overrides'
 
 Optional Configuration
 ----------------------
 
-* add `API_MASK_URL` key in DJANGO_CONFIG, default is socket.getfqdn()
-* add `API_MASK_PROTOCOL` key in DJANGO_CONFIG, default is `https`
+.. code-block:: python
+
+	API_MASK_URL = 'public-domain.com' # default is socket.getfqdn()
+	API_MASK_PROTOCOL = 'https' # default is https
 
 .. |License badge| image:: http://img.shields.io/badge/license-Apache%202.0-green.svg?style=flat
