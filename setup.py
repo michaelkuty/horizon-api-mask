@@ -1,23 +1,13 @@
-import gettext
-import glob
-import os
-import subprocess
-import sys
+import setuptools
 
-from setuptools import setup, find_packages, findall
+# In python < 2.7.4, a lazy loading of package `pbr` will break
+# setuptools if some other modules registered functions in `atexit`.
+# solution from: http://bugs.python.org/issue15881#msg170215
+try:
+    import multiprocessing  # noqa
+except ImportError:
+    pass
 
-setup(name='api_mask',
-      version='0.0.1',
-      license='',
-      description='Override API END Point Table',
-      author='Michael Kuty',
-      author_email='',
-      url='',
-      packages=find_packages(exclude=['bin', 'smoketests', 'tests']),
-      package_data = {'api_mask':
-                        [s[len('api_mask/'):] for s in
-                         findall('api_mask/templates')]},
-      py_modules=[],
-      test_suite='tests'
-)
-
+setuptools.setup(
+    setup_requires=['pbr'],
+    pbr=True)
